@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SCI FVA – Gestion Immobilière Résidentielle</title>
+  <meta name="description" content="SCI FVA – Spécialiste de la gestion et location de logements résidentiels depuis 1991 en Île-de-France." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C97A;
+      --gold-dark: #9A7B35;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --dark2: #1A1A1A;
+      --dark3: #222222;
+      --white: #FFFFFF;
+      --grey: #8A8A8A;
+      --light: #F5F0E8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 80px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--white); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--gold);
+      color: var(--black) !important;
+      padding: 10px 24px;
+      border-radius: 2px;
+      font-weight: 600 !important;
+      transition: background 0.3s !important;
+    }
+
+    .nav-cta:hover { background: var(--gold-light) !important; color: var(--black) !important; }
+    .nav-cta::after { display: none !important; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { display: block; width: 25px; height: 2px; background: var(--white); transition: 0.3s; }
+
+    /* ── HERO ── */
+    #accueil {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background: var(--black);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #0A0A0A 0%, #1A1208 50%, #0A0A0A 100%);
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -50%; right: -20%;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: -30%; left: -10%;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      padding-top: 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      padding: 8px 18px;
+      border-radius: 30px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge span {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-badge p { font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .gold { color: var(--gold); }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+      padding: 15px 32px;
+      border: none;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.35); }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--white);
+      padding: 15px 32px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative;
+      height: 560px;
+    }
+
+    .hero-card-main {
+      position: absolute;
+      top: 0; right: 0;
+      width: 85%;
+      height: 420px;
+      background: var(--dark2);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .hero-card-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+      filter: sepia(30%) brightness(0.8);
+    }
+
+    .hero-card-main .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.8) 0%, transparent 50%);
+    }
+
+    .hero-card-stat {
+      position: absolute;
+      bottom: 60px; left: 0;
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+      padding: 20px 24px;
+      min-width: 180px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card-stat .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .hero-card-stat .stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--dark2);
+      border-top: 1px solid rgba(201,168,76,0.15);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 3rem 5%;
+    }
+
+    .stats-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+
+    .stat-item { position: relative; }
+
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      height: 50px; width: 1px;
+      background: rgba(201,168,76,0.2);
+    }
+
+    .stat-num-big {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label-big { font-size: 0.8rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 6px; }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 100px 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .gold-line {
+      width: 60px; height: 2px;
+      background: linear-gradient(to right, var(--gold), transparent);
+      margin-bottom: 2rem;
+    }
+
+    .section-container { max-width: 1200px; margin: 0 auto; }
+
+    /* ── À PROPOS ── */
+    #apropos { background: var(--dark); }
+
+    .apropos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .apropos-img-wrapper {
+      position: relative;
+    }
+
+    .apropos-img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: brightness(0.75) sepia(20%);
+    }
+
+    .apropos-badge {
+      position: absolute;
+      bottom: -30px; right: -30px;
+      background: var(--gold);
+      color: var(--black);
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      box-shadow: 0 10px 30px rgba(201,168,76,0.4);
+    }
+
+    .apropos-badge .num { font-size: 2.5rem; font-weight: 700; line-height: 1; }
+    .apropos-badge .txt { font-size: 0.65rem; text-align: center; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    .apropos-content { }
+
+    .apropos-text {
+      color: rgba(255,255,255,0.72);
+      line-height: 1.9;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .apropos-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+
+    .value-item:hover { border-color: rgba(201,168,76,0.4); }
+
+    .value-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .value-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 4px; color: var(--gold); }
+    .value-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--black); }
+
+    .services-header { text-align: center; margin-bottom: 4rem; }
+    .services-header .gold-line { margin: 0 auto 2rem; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold), var(--gold-dark));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover { border-color: rgba(201,168,76,0.35); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: rgba(201,168,76,0.12);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .service-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--white);
+    }
+
+    .service-desc { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.8; }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: gap 0.3s;
+    }
+
+    .service-link:hover { gap: 14px; }
+
+    /* ── EXPERTISE ── */
+    #expertise {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #expertise::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .expertise-steps { display: flex; flex-direction: column; gap: 2rem; }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      border-left: 2px solid rgba(201,168,76,0.15);
+      transition: border-color 0.3s;
+    }
+
+    .step:hover { border-color: var(--gold); }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 40px;
+    }
+
+    .step-title { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+    .step-desc { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+    .expertise-img-side {
+      position: relative;
+      height: 550px;
+    }
+
+    .exp-img-1 {
+      position: absolute;
+      top: 0; right: 0;
+      width: 80%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: brightness(0.7) sepia(20%);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .exp-img-2 {
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 55%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: brightness(0.7) sepia(20%);
+      border: 1px solid rgba(201,168,76,0.2);
+    }
+
+    .exp-highlight {
+      position: absolute;
+      bottom: 50px; right: 10px;
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+      padding: 16px 20px;
+      width: 170px;
+    }
+
+    .exp-highlight .hl-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .exp-highlight .hl-label { font-size: 0.72rem; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── TÉMOIGNAGES ── */
+    #temoignages { background: var(--black); }
+
+    .temoignages-header { text-align: center; margin-bottom: 4rem; }
+    .temoignages-header .gold-line { margin: 0 auto 2rem; }
+
+    .temoignages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .temoignage-card {
+      background: var(--dark2);
+      border: 1px solid rgba(201,168,76,0.12);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.3s;
+    }
+
+    .temoignage-card:hover { border-color: rgba(201,168,76,0.3); }
+
+    .stars { color: var(--gold); font-size: 1rem; margin-bottom: 1rem; letter-spacing: 3px; }
+
+    .temoignage-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .temoignage-author { display: flex; align-items: center; gap: 12px; }
+
+    .author-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--black);
+      flex-shrink: 0;
+    }
+
+    .author-name { font-size: 0.9rem; font-weight: 600; }
+    .author-role { font-size: 0.75rem; color: rgba(255,255,255,0.5); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--dark); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .contact-info { }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .contact-icon {
+      width: 48px; height: 48px;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 4px; }
+    .contact-val { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+
+    .contact-form { }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem; }
+
+    .form-group label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.6); }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px;
+      padding: 14px 16px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.3s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--gold); background: rgba(201,168,76,0.05); }
+
+    .form-group textarea { resize: vertical; min-height: 130px; }
+
+    .form-group select option { background: var(--dark2); }
+
+    .form-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      padding: 16px;
+      border: none;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(201,168,76,0.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      border-top: 1px solid rgba(201,168,76,0.15);
+      padding: 60px 5% 30px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 2px;
+      display: block;
+      margin-bottom: 1rem;
+      text-decoration: none;
+    }
+
+    .footer-brand p { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.8; max-width: 260px; }
+
+    .footer-col h4 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.3s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+    /* ── BACK TO TOP ── */
+    .back-top {
+      position: fixed;
+      bottom: 30px; right: 30px;
+      width: 48px; height: 48px;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 2px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+    }
+
+    .back-top.visible { opacity: 1; pointer-events: all; }
+    .back-top:hover { background: var(--gold-light); transform: translateY(-3px); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-visual { display: none; }
+      .hero-buttons { justify-content: center; }
+      .hero-desc { margin: 0 auto 2.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2)::after { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .temoignages-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .apropos-grid, .expertise-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .apropos-badge { right: 0; }
+      .expertise-img-side { height: 350px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 70px 5%; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .apropos-values { grid-template-columns: 1fr; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in:nth-child(2) { transition-delay: 0.1s; }
+    .fade-in:nth-child(3) { transition-delay: 0.2s; }
+    .fade-in:nth-child(4) { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a class="nav-logo" href="#accueil">SCI <span>FVA</span></a>
+    <ul class="nav-links">
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#apropos">À Propos</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#expertise">Notre Approche</a></li>
+      <li><a href="#contact" class="nav-cta">Nous Contacter</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="accueil">
+    <div class="hero-bg"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span></span>
+          <p>Excellence Immobilière depuis 1991</p>
+        </div>
+        <h1 class="hero-title">
+          Votre patrimoine<br/>
+          <span class="gold">immobilier,</span><br/>
+          notre expertise
+        </h1>
+        <p class="hero-desc">
+          SCI FVA est votre partenaire de confiance pour la gestion et la location de logements résidentiels en Île-de-France. Plus de 30 ans d'expérience au service de votre patrimoine.
+        </p>
+        <div class="hero-buttons">
+          <a href="#services" class="btn-primary">Découvrir nos services</a>
+          <a href="#contact" class="btn-secondary">Nous contacter</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=800&q=80" alt="Immeuble résidentiel" />
+          <div class="overlay"></div>
+        </div>
+        <div class="hero-card-stat">
+          <div class="stat-num">+30</div>
+          <div class="stat-label">Années d'expérience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item fade-in">
+        <span class="stat-num-big">1991</span>
+        <div class="stat-label-big">Année de création</div>
+      </div>
+      <div class="stat-item fade-in">
+        <span class="stat-num-big">+30</span>
+        <div class="stat-label-big">Ans d'expertise</div>
+      </div>
+      <div class="stat-item fade-in">
+        <span class="stat-num-big">100%</span>
+        <div class="stat-label-big">Engagement qualité</div>
+      </div>
+      <div class="stat-item fade-in">
+        <span class="stat-num-big">IDF</span>
+        <div class="stat-label-big">Île-de-France</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- À PROPOS -->
+  <section id="apropos">
+    <div class="section-container">
+      <div class="apropos-grid">
+        <div class="apropos-img-wrapper fade-in">
+          <img class="apropos-img" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&q=80" alt="Gestion immobilière" />
+          <div class="apropos-badge">
+            <span class="num">30+</span>
+            <span class="txt">ans<br/>d'expérience</span>
+          </div>
+        </div>
+        <div class="apropos-content fade-in">
+          <span class="section-label">À Propos de Nous</span>
+          <h2 class="section-title">Un acteur de confiance<br/>de l'immobilier résidentiel</h2>
+          <div class="gold-line"></div>
+          <p class="apropos-text">
+            Fondée en 1991, la SCI FVA est une société civile immobilière spécialisée dans la gestion locative de logements résidentiels en Île-de-France. Basée à Yerres, dans l'Essonne, nous mettons notre savoir-faire au service de la valorisation et de la gestion de patrimoine immobilier.
+          </p>
+          <p class="apropos-text">
+            Notre approche rigoureuse et humaine nous permet d'offrir à nos locataires des logements de qualité, tout en assurant à nos partenaires une gestion sereine et pérenne de leurs biens.
+          </p>
+          <div class="apropos-values">
+            <div class="value-item">
+              <div class="value-icon">🏛️</div>
+              <div>
+                <div class="value-title">Fiabilité</div>
+                <div class="value-desc">30 ans d'expérience éprouvée dans l'immobilier</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🤝</div>
+              <div>
+                <div class="value-title">Proximité</div>
+                <div class="value-desc">Un accompagnement personnalisé et attentif</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🔑</div>
+              <div>
+                <div class="value-title">Expertise</div>
+                <div class="value-desc">Maîtrise du marché résidentiel en IDF</div>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">⚖️</div>
+              <div>
+                <div class="value-title">Transparence</div>
+                <div class="value-desc">Une gestion claire et honnête</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-container">
+      <div class="services-header">
+        <span class="section-label">Nos Services</span>
+        <h2 class="section-title">Ce que nous proposons</h2>
+        <div class="gold-line"></div>
+        <p style="color:rgba(255,255,255,0.6);max-width:550px;margin:0 auto;font-size:0.95rem;line-height:1.8;">
+          SCI FVA vous accompagne à chaque étape de votre parcours immobilier, avec des services adaptés à vos besoins.
+        </p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-in">
+          <div class="service-num">01</div>
+          <span class="service-icon">🏠</span>
+          <h3 class="service-title">Location Résidentielle</h3>
+          <p class="service-desc">Mise en location de logements résidentiels de qualité — appartements et maisons — dans la région Île-de-France, pour des locataires soigneusement sélectionnés.</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-num">02</div>
+          <span class="service-icon">📋</span>
+          <h3 class="service-title">Gestion Locative</h3>
+          <p class="service-desc">Prise en charge complète de la gestion de vos biens immobiliers : suivi des loyers, entretien, relations avec les locataires et gestion administrative.</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-num">03</div>
+          <span class="service-icon">🔧</span>
+          <h3 class="service-title">Entretien & Maintenance</h3>
+          <p class="service-desc">Suivi rigoureux de l'état des logements, interventions rapides pour les travaux de maintenance et d'entretien afin de préserver la valeur de votre patrimoine.</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-num">04</div>
+          <span class="service-icon">📊</span>
+          <h3 class="service-title">Valorisation du Patrimoine</h3>
+          <p class="service-desc">Conseil et accompagnement pour optimiser la rentabilité de votre patrimoine immobilier sur le long terme.</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-num">05</div>
+          <span class="service-icon">📝</span>
+          <h3 class="service-title">Rédaction des Baux</h3>
+          <p class="service-desc">Rédaction et gestion des contrats de location en conformité avec la réglementation en vigueur, pour sécuriser vos relations locatives.</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+        <div class="service-card fade-in">
+          <div class="service-num">06</div>
+          <span class="service-icon">🛡️</span>
+          <h3 class="service-title">Suivi Réglementaire</h3>
+          <p class="service-desc">Veille et mise en conformité de vos biens avec les dernières réglementations immobilières (diagnostics, normes énergétiques, etc.).</p>
+          <a href="#contact" class="service-link">En savoir plus →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE / PROCESSUS -->
+  <section id="expertise">
+    <div class="section-container">
+      <div class="expertise-grid">
+        <div>
+          <span class="section-label">Notre Approche</span>
+          <h2 class="section-title">Un processus<br/>éprouvé en 4 étapes</h2>
+          <div class="gold-line"></div>
+          <div class="expertise-steps">
+            <div class="step fade-in">
+              <div class="step-num">01</div>
+              <div>
+                <div class="step-title">Évaluation du bien</div>
+                <div class="step-desc">Analyse complète du logement, estimation du loyer optimal selon le marché local et les caractéristiques du bien.</div>
+              </div>
+            </div>
+            <div class="step fade-in">
+              <div class="step-num">02</div>
+              <div>
+                <div class="step-title">Mise en location</div>
+                <div class="step-desc">Diffusion des annonces, organisation des visites et sélection rigoureuse des candidats locataires.</div>
+              </div>
+            </div>
+            <div class="step fade-in">
+              <div class="step-num">03</div>
+              <div>
+                <div class="step-title">Gestion quotidienne</div>
+                <div class="step-desc">Encaissement des loyers, gestion des demandes d'entretien, relations avec les locataires et suivi administratif.</div>
+              </div>
+            </div>
+            <div class="step fade-in">
+              <div class="step-num">04</div>
+              <div>
+                <div class="step-title">Reporting régulier</div>
+                <div class="step-desc">Comptes rendus de gestion transparents et réguliers pour vous tenir informé de l'état de votre patrimoine.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="expertise-img-side fade-in">
+          <img class="exp-img-1" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Immeuble résidentiel" />
+          <img class="exp-img-2" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Logement moderne" />
+          <div class="exp-highlight">
+            <div class="hl-num">Yerres</div>
+            <div class="hl-label">Essonne, Île-de-France</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TÉMOIGNAGES -->
+  <section id="temoignages">
+    <div class="section-container">
+      <div class="temoignages-header">
+        <span class="section-label">Témoignages</span>
+        <h2 class="section-title">Ce que disent nos locataires</h2>
+        <div class="gold-line"></div>
+      </div>
+      <div class="temoignages-grid">
+        <div class="temoignage-card fade-in">
+          <div class="stars">★★★★★</div>
+          <p class="temoignage-text">"Une société sérieuse et réactive. Les demandes de maintenance sont traitées rapidement et la communication est toujours claire. Je recommande vivement."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">M</div>
+            <div>
+              <div class="author-name">Marie D.</div>
+              <div class="author-role">Locataire — Yerres</div>
+            </div>
+          </div>
+        </div>
+        <div class="temoignage-card fade-in">
+          <div class="stars">★★★★★</div>
+          <p class="temoignage-text">"Logement en parfait état à l'entrée dans les lieux. La gestion est professionnelle et transparente. J'apprécie la disponibilité et le sérieux de l'équipe."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">P</div>
+            <div>
+              <div class="author-name">Pierre L.</div>
+              <div class="author-role">Locataire — Essonne</div>
+            </div>
+          </div>
+        </div>
+        <div class="temoignage-card fade-in">
+          <div class="stars">★★★★★</div>
+          <p class="temoignage-text">"Très bonne expérience depuis plusieurs années. Un bailleur de confiance qui respecte ses engagements. La gestion est humaine et à l'écoute des besoins."</p>
+          <div class="temoignage-author">
+            <div class="author-avatar">S</div>
+            <div>
+              <div class="author-name">Sophie R.</div>
+              <div class="author-role">Locataire — Île-de-France</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-container">
+      <div class="contact-grid">
+        <div>
+          <span class="section-label">Contactez-Nous</span>
+          <h2 class="section-title">Parlons de<br/>votre projet</h2>
+          <div class="gold-line"></div>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.8;margin-bottom:2.5rem;">
+            Une question sur un logement disponible ou sur nos services de gestion ? Notre équipe est à votre disposition.
+          </p>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-label">Adresse</div>
+              <div class="contact-val">37 Rue du Parc<br/>91330 Yerres, France</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-label">Téléphone</div>
+              <div class="contact-val">À compléter</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val">contact@scifva.shop</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-label">Horaires</div>
+              <div class="contact-val">Lun – Ven : 9h00 – 18h00</div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom</label>
+              <input type="text" placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom</label>
+              <input type="text" placeholder="Votre nom" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="votre@email.fr" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone</label>
+              <input type="tel" placeholder="06 00 00 00 00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Objet de la demande</label>
+            <select>
+              <option value="">Sélectionnez un objet</option>
+              <option>Demande de location</option>
+              <option>Information sur un logement</option>
+              <option>Gestion de bien</option>
+              <option>Maintenance / Entretien</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Décrivez votre demande..."></textarea>
+          </div>
+          <button class="form-submit">Envoyer le message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href="#accueil">SCI FVA</a>
+        <p>Société Civile Immobilière spécialisée dans la gestion et la location de logements résidentiels en Île-de-France depuis 1991.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#apropos">À Propos</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#expertise">Notre Approche</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Location résidentielle</a></li>
+          <li><a href="#services">Gestion locative</a></li>
+          <li><a href="#services">Maintenance</a></li>
+          <li><a href="#services">Valorisation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">37 Rue du Parc, Yerres</a></li>
+          <li><a href="#">91330 Essonne</a></li>
+          <li><a href="#">Île-de-France, France</a></li>
+          <li><a href="#">contact@scifva.shop</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 SCI FVA – Tous droits réservés | SIREN : 383 089 711</p>
+      <p>Société Civile Immobilière | Gestion de logements résidentiels</p>
+    </div>
+  </footer>
+
+  <!-- BACK TO TOP -->
+  <a href="#accueil" class="back-top" id="backTop">↑</a>
+
+  <script>
+    // Back to top
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => {
+      backTop.classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // Navbar shadow on scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.5)' : 'none';
+    });
+
+    // Fade-in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    faders.forEach(f => observer.observe(f));
+
+    // Mobile menu
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '80px';
+      links.style.left = '0';
+      links.style.right = '0';
+      links.style.background = 'rgba(10,10,10,0.98)';
+      links.style.padding = '2rem 5%';
+      links.style.gap = '1.5rem';
+      links.style.borderBottom = '1px solid rgba(201,168,76,0.2)';
+    }
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.addEventListener('click', () => {
+        const links = document.querySelector('.nav-links');
+        links.style.display = 'none';
+      });
+    });
+  </script>
+</body>
+</html>
